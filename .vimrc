@@ -13,6 +13,8 @@ colorscheme molokai
 
 " line numbers
 set number
+" column numbers
+set ruler
 " do not copy line numbers when selecting with mouse
 "se mouse+=a
 "se mouse=v
