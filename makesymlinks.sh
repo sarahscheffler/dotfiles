@@ -9,7 +9,9 @@ mkdir -p $BACKUP # if backup folder doesn't exist, make it
 
 cd $DOTFILES
 for file in $FILES; do
-    mv ~/.$file $BACKUP
+    if [ -e ~/.$file ] ; then
+        mv ~/.$file $BACKUP
+    fi
     ln -sfv $DOTFILES/.$file ~/.$file
 done
 
