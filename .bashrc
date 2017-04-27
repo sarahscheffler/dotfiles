@@ -4,6 +4,9 @@ export PS1="\[\033[38;5;123m\]\u\[$(tput sgr0)\]\[\033[38;5;230m\]@\[$(tput sgr0
 # Homebrew
 PATH=/usr/local/Cellar/:$PATH
 
+# better octal dump
+alias od="od -A x -t x1"
+
 # git gud maps to git --help
 git() { if [[ $@ == "gud" || $@ == "--gud" ]]; then command git --help; else command git "$@"; fi; }         
 
