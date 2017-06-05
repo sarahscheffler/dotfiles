@@ -6,7 +6,7 @@ BACKUP=$HOME/backup_dotfiles
 FILES="bashrc vimrc tmux.conf"
 
 VIMCOLORS=$HOME/.vim/colors
-COLORSCHEME=https://github.com/tomasr/molokai/blob/master/colors/molokai.vim
+COLORSCHEME=https://raw.githubusercontent.com/tomasr/molokai/master/colors/molokai.vim
 
 mkdir -p $BACKUP # if backup folder doesn't exist, make it
 
