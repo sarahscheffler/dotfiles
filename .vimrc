@@ -1,3 +1,7 @@
+
+"""TODO: make a shortcut to backspace all whitespace at beginning of line
+""" and end up at end of prev line
+
 filetype plugin indent on
 " show existing tab with 4 spaces width
 set tabstop=4
@@ -11,6 +15,9 @@ syntax on
 " color scheme
 colorscheme molokai
 
+" default linewrap 79
+set tw=79
+
 " line numbers
 set number
 " column numbers
@@ -19,12 +26,29 @@ set ruler
 "se mouse+=a
 "se mouse=v
 
+" Make backspace work like normal
+set backspace=indent,eol,start
+
 " vim commands go to clipboard
 "set clipboard=unnamed
 
 " vim-plug plugins
 call plug#begin()
-Plug 'rust-lang/rust.vim' " Rust syntax hilighting
+
+" Rust syntax hilighting
+Plug 'rust-lang/rust.vim' 
+
+function! BuildComposer(info)
+    if a:info.status != 'unchanged' || a:info.force
+        if has('nvim') " if i ever get neo-vim lolol
+            !cargo build --release
+        else
+            !cargo build --release --no-default-features --features json-rpc
+        endif
+    endif
+endfunction
+Plug 'euclio/vim-markdown-composer', { 'do': function('BuildComposer') }
+
 call plug#end()
 
 " set window navigation to alt+hjkl
