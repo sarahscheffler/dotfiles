@@ -10,9 +10,10 @@ fi
 alias od="od -A x -t x1"
 
 # ls always lists folders wtih / and execs with *, and shows hidden files
-alias ls="ls -CF -A"
+alias ls="ls -CF"
 
-# tmux assumes 256 color support
+# tmux assumes 256 color support, and reload source file to account for
+# background processes to finish
 alias tmux="tmux -2"
 
 # Use vim for sudoedit (and others)
