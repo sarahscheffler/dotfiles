@@ -15,6 +15,10 @@ alias ls="ls -CF -A"
 # tmux assumes 256 color support
 alias tmux="tmux -2"
 
+# Use vim for sudoedit (and others)
+export VISUAL=vim
+export EDITOR="$VISUAL"
+
 # git gud maps to git --help
 git() { if [[ $@ == "gud" || $@ == "--gud" ]]; then command git --help; else command git "$@"; fi; }         
 
