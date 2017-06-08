@@ -26,6 +26,9 @@ set ruler
 "se mouse+=a
 "se mouse=v
 
+" term needs color scheme to agree with tmux
+set term=screen-256color
+
 " Make backspace work like normal
 set backspace=indent,eol,start
 

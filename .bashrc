@@ -12,6 +12,9 @@ alias od="od -A x -t x1"
 # ls always lists folders wtih / and execs with *, and shows hidden files
 alias ls="ls -CF -A"
 
+# tmux assumes 256 color support
+alias tmux="tmux -2"
+
 # git gud maps to git --help
 git() { if [[ $@ == "gud" || $@ == "--gud" ]]; then command git --help; else command git "$@"; fi; }         
 
