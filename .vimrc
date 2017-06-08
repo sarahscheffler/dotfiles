@@ -65,6 +65,7 @@ nmap <silent> ¬ :wincmd l<CR>
 "nmap <silent> <A-Right> :wincmd l<CR>
 " create  newly created windows on the right
 set splitright
+set splitbelow
 
 "TODO: automatically :set paste <paste> :set nopaste
 
