@@ -29,6 +29,10 @@ set ruler
 " term needs color scheme to agree with tmux
 set term=screen-256color
 
+" name window after vim file being edited
+autocmd BufReadPost,FileReadPost,BufNewFile,BufEnter * call system("tmux rename-window 'vim:" . expand("%:t") ."'")
+autocmd VimLeave * call system("tmux setw automatic-rename")
+
 " Make backspace work like normal
 set backspace=indent,eol,start
 
