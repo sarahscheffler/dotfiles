@@ -1,5 +1,4 @@
-#colored command line
-#export PS1="\[\033[38;5;123m\]\u\[$(tput sgr0)\]\[\033[38;5;230m\]@\[$(tput sgr0)\]\[\033[38;5;222m\]\h\[$(tput sgr0)\]\[\033[38;5;230m\]:\[$(tput sgr0)\]\[\033[38;5;194m\]\w\[$(tput sgr0)\]\[\033[38;5;230m\]\$\[$(tput sgr0)\] "
+#colored command line based on hostname/username
 export PS1="\[\033[38;5;$(whoami | sum | awk '{print 1 + ($1 % 255)}')m\]\u\[$(tput sgr0)\]\[\033[38;5;m\]@\[$(tput sgr0)\]\[\033[38;5;$(hostname | sum | awk '{print 1 + ($1 % 255)}')m\]\h\[$(tput sgr0)\]\[\033[38;5;230m\]:\[$(tput sgr0)\]\[\033[38;5;$(pwd | sum | awk '{print 1 + ($1 % 255)}')m\]\w\[$(tput sgr0)\]\[\033[38;5;230m\]\$\[$(tput sgr0)\] "
 
 # Homebrew if we're on Mac OS
@@ -23,4 +22,14 @@ export EDITOR="$VISUAL"
 
 # git gud maps to git --help
 git() { if [[ $@ == "gud" || $@ == "--gud" ]]; then command git --help; else command git "$@"; fi; }         
+
+# If we have cargo/rust, add it to path
+if [ -d "$HOME/.cargo" ]; then
+    PATH=$HOME/.cargo/bin:$PATH
+fi
+
+# If we have Rust, set RUST_SRC_PATH
+if [ -x /usr/local/bin/rustc ]; then
+    RUST_SRC_PATH=/usr/local/Cellar/rust/rustc-1.18.0-src #TODO this isn't great
+fi
 
