@@ -16,6 +16,17 @@ alias ls="ls -CF"
 # background processes to finish
 alias tmux="tmux -2"
 
+# in tmux, panes with ssh include the hostname in their name
+ssh() {
+    if [ "$(ps -p $(ps -p $$ -o ppid=) -o comm=)" = "tmux" ]; then
+        tmux rename-window "ssh:$(echo $* | rev | cut -d ' ' -f1 | rev | cut -d . -f 1)"
+        command ssh "$@"
+        tmux set-window-option automatic-rename "on" 1>/dev/null
+    else
+        command ssh "$@"
+    fi
+}
+
 # Use vim for sudoedit (and others)
 export VISUAL=vim
 export EDITOR="$VISUAL"
