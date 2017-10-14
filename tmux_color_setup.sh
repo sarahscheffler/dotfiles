@@ -48,11 +48,9 @@ tmux setw -g window-status-bell-bg $TMUX_ACTIVE
 
 # pane colors
 tmux set -g pane-active-border-fg $TMUX_ACTIVE
-#tmux set -g pane-active-border-bg $TMUX_BG
-tmux set -g pane-active-border-bg $TMUX_ACTIVE
+tmux set -g pane-active-border-bg $TMUX_BG
 tmux set -g pane-border-fg $TMUX_INACTIVE
-#tmux set -g pane-border-bg $TMUX_BG
-tmux set -g pane-border-bg $TMUX_INACTIVE
+tmux set -g pane-border-bg $TMUX_BG
 tmux set -g display-panes-active-colour $TMUX_ACTIVE
 tmux set -g display-panes-colour $TMUX_TEXTCOLOR
 
