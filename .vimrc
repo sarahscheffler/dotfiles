@@ -9,6 +9,12 @@ set shiftwidth=4
 " On pressing tab, insert 4 spaces
 set expandtab
 
+" Always generate a filename when using grep (even for a single file)
+set grepprg=grep\ -nH\ $*
+
+" Editing empty .tex files is done as tex instead of plaintex
+let g:tex_flavor='latex'
+
 " syntax highlighting
 syntax on
 " color scheme
@@ -56,8 +62,9 @@ if empty(glob('~/.vim/autoload/plug.vim'))
 endif
 call plug#begin()
 
+Plug 'vim-latex/vim-latex' " LaTeX editing features
 Plug 'cespare/vim-toml' " TOML syntax hilighting
-"Plug 'jiangmiao/auto-pairs' " Automatically pair {}, [], etc
+Plug 'jiangmiao/auto-pairs' " Automatically pair {}, [], etc
 Plug 'tpope/vim-surround' " Surround words with quotes/braces
 Plug 'rust-lang/rust.vim' " Rust syntax hilighting
 Plug 'racer-rust/vim-racer' " Rust tab completion
