@@ -24,7 +24,7 @@ colorscheme molokai
 set tw=79
 
 " spellcheck
-set spell
+"set spell
 
 " line numbers
 set number
@@ -35,7 +35,7 @@ set ruler
 "se mouse=v
 
 " term needs color scheme to agree with tmux
-set term=screen-256color
+"set term=screen-256color
 
 " name window after vim file being edited
 autocmd BufReadPost,FileReadPost,BufNewFile,BufEnter * call system("tmux rename-window 'vim:" . expand("%:t") ."'")
@@ -67,9 +67,15 @@ Plug 'cespare/vim-toml' " TOML syntax hilighting
 Plug 'jiangmiao/auto-pairs' " Automatically pair {}, [], etc
 Plug 'tpope/vim-surround' " Surround words with quotes/braces
 Plug 'rust-lang/rust.vim' " Rust syntax hilighting
-Plug 'racer-rust/vim-racer' " Rust tab completion
-let g:racer_cmd = "/Users/firechant/.cargo/bin/racer" " set racer cmd path
-let g:racer_experimental_completer = 1
+"Plug 'racer-rust/vim-racer' " Rust tab completion
+"let g:racer_cmd = "/Users/firechant/.cargo/bin/racer" " set racer cmd path
+"let g:racer_experimental_completer = 1
+
+Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' } "neovim language server protocol
+
+Plug 'junegunn/fzf' "multi entry selection
+Plug 'roxma/nvim-completion-manager' "completion manager for neovim
+Plug 'Shougo/echodoc.vim' "function signature, inline, etc
 
 function! BuildComposer(info)
     if a:info.status != 'unchanged' || a:info.force
@@ -100,4 +106,13 @@ set splitbelow
 "TODO: automatically :set paste <paste> :set nopaste
 "When you do, also have it turn off linewrapping while pasting
 
+" LanguageClient integration
+set hidden
+let g:LanguageClient_sererCommands = {
+    \ 'rust': ['rustup', 'run', 'nightly', 'rls'],
+    \ }
+let g:LanguageClient_autoStart = 1
+noremap <silent> K :call LanguageClient_textDocument_hover()<CR>
+noremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
+noremap <silent> <F6> :call LanguageClient_textDocument_rename()<CR>
 
