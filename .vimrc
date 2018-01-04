@@ -1,6 +1,8 @@
 """TODO: make a shortcut to backspace all whitespace at beginning of line
 """ and end up at end of prev line
 
+"""TODO: Move neovim-only functionality to neovim config file
+
 filetype plugin indent on
 " show existing tab with 4 spaces width
 set tabstop=4
@@ -8,6 +10,8 @@ set tabstop=4
 set shiftwidth=4
 " On pressing tab, insert 4 spaces
 set expandtab
+
+let mapleader = ","
 
 " Always generate a filename when using grep (even for a single file)
 set grepprg=grep\ -nH\ $*
@@ -48,7 +52,7 @@ set backspace=indent,eol,start
 " the preceeding line
 "nmap <C-BS> <d><0><k><J>
 
-" \s gets ready to substitute all occurrences of the word under the cursor
+" ,s gets ready to substitute all occurrences of the word under the cursor
 nnoremap <Leader>s :%s/\<<C-r><C-w>\>//g<Left><Left>
 
 " vim commands go to clipboard
@@ -76,6 +80,10 @@ Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' } "neovim 
 Plug 'junegunn/fzf' "multi entry selection
 Plug 'roxma/nvim-completion-manager' "completion manager for neovim
 Plug 'Shougo/echodoc.vim' "function signature, inline, etc
+"Plug 'neomake/neomake' "make for neovim
+"call neomake#configure#automake('w') "run neomake when writing
+" call neomake#configure#automake('w', 750) "same as above but also after 750ms
+" call neomake#configure#automake('rw',1000) "when reading and writing
 
 function! BuildComposer(info)
     if a:info.status != 'unchanged' || a:info.force
@@ -95,6 +103,8 @@ nmap <silent> ˙ :wincmd h<CR>
 nmap <silent> ∆ :wincmd j<CR>
 nmap <silent> ˚ :wincmd k<CR>
 nmap <silent> ¬ :wincmd l<CR>
+nmap <silent> <C-l> :bnext<CR>
+nmap <silent> <C-h> :bprevious<CR>
 "nmap <silent> <A-Left> :wincmd h<CR> "these conflict with tmux bindings
 "nmap <silent> <A-Down> :wincmd j<CR>
 "nmap <silent> <A-Up> :wincmd k<CR>
@@ -108,11 +118,18 @@ set splitbelow
 
 " LanguageClient integration
 set hidden
-let g:LanguageClient_sererCommands = {
+let g:LanguageClient_serverCommands = {
     \ 'rust': ['rustup', 'run', 'nightly', 'rls'],
     \ }
 let g:LanguageClient_autoStart = 1
 noremap <silent> K :call LanguageClient_textDocument_hover()<CR>
 noremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
 noremap <silent> <F6> :call LanguageClient_textDocument_rename()<CR>
+
+" nvim-completion-manager settings
+" start newline when exiting menu
+"inoremap <expr> <CR> (pumvisible() ? "\<c-y>\<cr>" : "\<CR>") 
+" tab instead of enter
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>" 
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>" 
 
