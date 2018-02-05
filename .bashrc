@@ -28,8 +28,4 @@ if [ -d "$HOME/.cargo" ]; then
     PATH=$HOME/.cargo/bin:$PATH
 fi
 
-# If we have Rust, set RUST_SRC_PATH
-if [ -x /usr/local/bin/rustc ]; then
-    RUST_SRC_PATH=/usr/local/Cellar/rust/rustc-1.18.0-src #TODO this isn't great
-fi
 
