@@ -11,6 +11,7 @@ set shiftwidth=4
 " On pressing tab, insert 4 spaces
 set expandtab
 
+" Redefine <leader> to ',' because '\' is really far away
 let mapleader = ","
 
 " Always generate a filename when using grep (even for a single file)
@@ -18,6 +19,9 @@ set grepprg=grep\ -nH\ $*
 
 " Editing empty .tex files is done as tex instead of plaintex
 let g:tex_flavor='latex'
+
+" vim-latex compiles to pdf
+let g:Tex_DefaultTargetFormat='pdf'
 
 " syntax highlighting
 syntax on
@@ -85,9 +89,10 @@ Plug 'Shougo/echodoc.vim' "function signature, inline, etc
 " call neomake#configure#automake('w', 750) "same as above but also after 750ms
 " call neomake#configure#automake('rw',1000) "when reading and writing
 
+" TODO: This doesn't close when closing nvim; figure out why
 function! BuildComposer(info)
     if a:info.status != 'unchanged' || a:info.force
-        if has('nvim') " if i ever get neo-vim lolol
+        if has('nvim')
             !cargo build --release
         else
             !cargo build --release --no-default-features --features json-rpc
@@ -128,7 +133,7 @@ noremap <silent> <F6> :call LanguageClient_textDocument_rename()<CR>
 
 " nvim-completion-manager settings
 " start newline when exiting menu
-"inoremap <expr> <CR> (pumvisible() ? "\<c-y>\<cr>" : "\<CR>") 
+inoremap <expr> <CR> (pumvisible() ? "\<c-y>\<cr>" : "\<CR>") 
 " tab instead of enter
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>" 
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>" 
