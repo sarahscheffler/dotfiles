@@ -13,6 +13,11 @@ alias od="od -A x -t x1"
 # src to source ~/.bashrc
 alias src="source $HOME/.bashrc"
 
+# make vim nvim
+if type nvim > /dev/null 2>&1; then
+    alias vim='nvim'
+fi
+
 # ls always lists folders wtih / and execs with *, and shows hidden files
 alias ls="ls -CF"
 
