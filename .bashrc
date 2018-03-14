@@ -56,3 +56,7 @@ if [ -x /usr/local/bin/rustc ]; then
     RUST_SRC_PATH="$(rustc --print sysroot)/lib/rustlib/src/rust/src"
 fi
 
+# If Skim exists where we expect it, alias skimpdf tool
+if [ -x /Applications/Skim.app/Contents/SharedSupport/skimpdf ]; then
+    alias skimpdf="/Applications/Skim.app/Contents/SharedSupport/skimpdf"
+fi
