@@ -159,9 +159,9 @@ let g:bufferline_echo = 0
 autocmd VimEnter *
         \ let &statusline='%{bufferline#refresh_status()}' 
         \ .bufferline#get_status_string()
-let g:buferline_solo_highlight = 1
-let g:bufferline_active_highlight = 'StatusLine'
-let g:bufferline_inactive_highlight = 'StatusLineNC'
+"let g:buferline_solo_highlight = 1
+"let g:bufferline_active_highlight = 'StatusLine'
+"let g:bufferline_inactive_highlight = 'StatusLineNC'
 
 " nextval increment with ,^ and ,v
 nnoremap <Leader>v <C-x>
@@ -174,6 +174,10 @@ let g:airline#extensions#default#layout = [
             \ ['z', 'error', 'warning']
             \ ]
 let g:airline#extensions#bufferline#enabled = 1
-let g:airline#extensions#bufferline#overwrite_variables = 0
+"let g:airline#extensions#bufferline#overwrite_variables = 0
 let laststatus=2 "statusline appears even before split
+
+let g:airline#extensions#wordcount#enabled = 0
+let g:airline#extensions#whitespace#enabled = 0
+"let g:airline_theme='zerus'
 
