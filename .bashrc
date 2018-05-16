@@ -40,8 +40,8 @@ ssh() {
 export VISUAL=vim
 export EDITOR="$VISUAL"
 
-# Use vi keys in the terminal
-set -o vi
+# Use emacs keys in the terminal
+set -o emacs
 
 # git gud maps to git --help
 git() { if [[ $@ == "gud" || $@ == "--gud" ]]; then command git --help; else command git "$@"; fi; }         
