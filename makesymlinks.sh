@@ -19,6 +19,12 @@ for file in $FILES; do
     ln -sfv "$DOTFILES/.$file" "$HOME/.$file"
 done
 
+# Symlink neovim config file to correct location
+if [ -f "$HOME/.config/nvim/init.vim" ] ; then
+	mv "$HOME/.config/nvim/init.vim" "$BACKUP"
+fi
+ln -sfv "$DOTFILES/nvimconfig.vim" "$HOME/.config/nvim/init.vim"
+
 # Download molokai color scheme for vim if we don't already have it
 mkdir -p "$VIMCOLORS"
 #TODO this gets the html page, not the actual raw!!!
