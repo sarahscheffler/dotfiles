@@ -15,6 +15,8 @@ set shiftwidth=4
 set expandtab
 " Show matching brackets
 set showmatch
+" Do not wrap text that is too long
+set nowrap
 
 " Redefine <leader> to ',' because '\' is really far away
 let mapleader = ","
@@ -37,7 +39,7 @@ syntax on
 colorscheme molokai
 
 " default linewrap 79
-set tw=79
+set tw=119
 
 " spellcheck
 "set spell
