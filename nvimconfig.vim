@@ -41,6 +41,7 @@ function! BuildComposer(info)
         endif
     endif
 endfunction
+let g:markdown_composer_custom_css = ["file:///Users/firechant/dotfiles/css_for_vmc.css"] " custom css
 Plug 'euclio/vim-markdown-composer', { 'do': function('BuildComposer') } " markdown rendering
 
 call plug#end()
