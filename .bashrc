@@ -7,6 +7,14 @@ if [ "$(uname)" == "Darwin" ]; then
     PATH=/usr/local/Cellar/:$PATH
 fi
 
+# Add /usr/local/bin to $PATH
+PATH=/usr/local/bin:$PATH
+
+# if it exists, add /Library/TeX/texbin to PATH
+if [ -d "/Library/TeX" ]; then
+    PATH=/Library/TeX/texbin:$PATH
+fi
+
 # better octal dump
 alias od="od -A x -t x1"
 
