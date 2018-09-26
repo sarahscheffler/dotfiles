@@ -6,7 +6,8 @@ BACKUP=$HOME/backup_dotfiles
 FILES="bashrc vimrc tmux.conf"
 
 VIMCOLORS=$HOME/.vim/colors
-COLORSCHEME=https://raw.githubusercontent.com/tomasr/molokai/master/colors/molokai.vim
+# Colorscheme originally from here:
+# COLORSCHEME=https://raw.githubusercontent.com/tomasr/molokai/master/colors/molokai.vim
 
 mkdir -p $BACKUP # if backup folder doesn't exist, make it
 
@@ -25,10 +26,9 @@ if [ -f "$HOME/.config/nvim/init.vim" ] ; then
 fi
 ln -sfv "$DOTFILES/nvimconfig.vim" "$HOME/.config/nvim/init.vim"
 
-# Download molokai color scheme for vim if we don't already have it
-mkdir -p "$VIMCOLORS"
-#TODO this gets the html page, not the actual raw!!!
-[ -f "$VIMCOLORS/${COLORSCHEME##*/}" ] || wget "$COLORSCHEME" -P "$VIMCOLORS"
+# Symlink colors file to correct location
+mkdir -p "$VIMCOLORS" #make vimcolors directory if dne
+ln -sfv "$DOTFILES/molokai.vim" "$VIMCOLORS/molokai.vim"
 
 # Reload configs
 source $HOME/.bashrc
