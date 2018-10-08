@@ -1,5 +1,5 @@
 #colored command line based on hostname/username
-export PS1="\[\033[38;5;$(whoami | sum | awk '{print 1 + ($1 % 255)}')m\]\u\[$(tput sgr0)\]\[\033[38;5;m\]@\[$(tput sgr0)\]\[\033[38;5;$(hostname | sum | awk '{print 1 + ($1 % 255)}')m\]\h\[$(tput sgr0)\]\[\033[38;5;230m\]:\[$(tput sgr0)\]\[\033[38;5;$(pwd | sum | awk '{print 1 + ($1 % 255)}')m\]\w\[$(tput sgr0)\]\[\033[38;5;230m\]\$\[$(tput sgr0)\] "
+export PS1="\[\033[38;5;$(whoami | sum | awk '{print 1 + ($1 % 255)}')m\]\u\[$(tty -s && tput sgr0)\]\[\033[38;5;m\]@\[$(tty -s && tput sgr0)\]\[\033[38;5;$(hostname | sum | awk '{print 1 + ($1 % 255)}')m\]\h\[$(tty -s && tput sgr0)\]\[\033[38;5;230m\]:\[$(tty -s && tput sgr0)\]\[\033[38;5;$(pwd | sum | awk '{print 1 + ($1 % 255)}')m\]\w\[$(tty -s && tput sgr0)\]\[\033[38;5;230m\]\$\[$(tty -s && tput sgr0)\] "
 #export PS1="\[\033[38;5;$(whoami | sum | awk '{print 1 + ($1 % 255)}')m\]\u\[$(tput sgr0)\]\[\033[38;5;m\]@\[$(tput sgr0)\]\[$(tput bold)\]\[\033[38;5;$(hostname | sum | awk '{print 1 + ($1 % 255)}')m\]\h\[$(tput sgr0)\]\[\033[38;5;230m\]:\[$(tput sgr0)\]\[\033[38;5;$(pwd | sum | awk '{print 1 + ($1 % 255)}')m\]\w\[$(tput sgr0)\]\[\033[38;5;230m\]\$\[$(tput sgr0)\] "
 
 # Homebrew if we're on Mac OS
