@@ -24,14 +24,14 @@ if [[ $(getdefaultsinkname | grep ${SPEAKERS}) ]];
 fi
 }
 mute_command() {
-    [[ $(getdefaultsinkmute | grep 'yes')  ]] && echo -n '(MUTE)'
+    [[ $(getdefaultsinkmute | grep 'yes')  ]] && echo -n '(MUTE) '
 }
 
 brightness_command() {
     echo -n "Bri: $(( 100 * $(brightnessctl g) / $(brightnessctl m) ))%"
 }
 volume_command() {
-    echo -n "Vol: $(getdefaultsinkvol) $(mute_command) $(sink_command)"
+    echo -n "Vol: $(getdefaultsinkvol) $(mute_command)$(sink_command)"
 }
 date_command() {
     date +'%Y-%m-%d  %A  %H:%M:%S '
@@ -39,5 +39,10 @@ date_command() {
 wifi_command() {
     nmcli -c no -f TYPE,NAME c | awk 'NR>1{printf "%s: %s", $1, $2; exit}'
 }
+battery_command() {
+    echo -n "Bat: "; upower -i $(upower -e | grep 'BAT') | \
+        awk '/^\s+time to empty: / {hrs1=$4; hrs2=$5};
+            /^\s+percentage: / {perc=$2; printf "%s (%s %s)", perc, hrs1, hrs2; exit}'
+}
 
-echo -n "$(wifi_command) ${SEPARATOR} $(brightness_command) ${SEPARATOR} $(volume_command) ${SEPARATOR} $(date_command)"
+echo -n "$(wifi_command) ${SEPARATOR} $(battery_command) ${SEPARATOR} $(brightness_command) ${SEPARATOR} $(volume_command) ${SEPARATOR} $(date_command)"
