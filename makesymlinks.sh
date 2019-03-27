@@ -1,6 +1,9 @@
 # Copy all files in FILES from $HOME to BACKUP, then create symlinks
 # from the home directory to these files
 
+CONFIG=$HOME/.config
+SWAY=$CONFIG/sway
+NVIM=$CONFIG/nvim
 DOTFILES=$HOME/dotfiles
 BACKUP=$HOME/backup_dotfiles
 FILES="bashrc vimrc tmux.conf"
@@ -20,15 +23,23 @@ for file in $FILES; do
     ln -sfv "$DOTFILES/.$file" "$HOME/.$file"
 done
 
-# Symlink neovim config file to correct location
-if [ -f "$HOME/.config/nvim/init.vim" ] ; then
-	mv "$HOME/.config/nvim/init.vim" "$BACKUP"
-fi
-ln -sfv "$DOTFILES/nvimconfig.vim" "$HOME/.config/nvim/init.vim"
+# make config dir if DNE
+mkdir -p $CONFIG
 
+# Symlink neovim config file to correct location
+mkdir -p $NVIM
+[ -f "$NVIM/init.vim" ] && mv "$NVIM/init.vim" "$BACKUP"
+ln -sfv "$DOTFILES/nvimconfig.vim" "$NVIM/init.vim"
 # Symlink colors file to correct location
 mkdir -p "$VIMCOLORS" #make vimcolors directory if dne
 ln -sfv "$DOTFILES/molokai.vim" "$VIMCOLORS/molokai.vim"
+
+# Sway stuff
+mkdir -p $SWAY
+[ -f "$SWAY/config" ] && mv "$SWAY/config" "$BACKUP/sway_config"
+ln -sfv "$DOTFILES/sway_config" "$SWAY/config"
+[ -f "$SWAY/status.sh" ] && mv "$SWAY/status.sh" "$BACKUP/sway_status.sh"
+ln -sfv "$DOTFILES/sway_status.sh" "$SWAY/status.sh"
 
 # Reload configs
 source $HOME/.bashrc
