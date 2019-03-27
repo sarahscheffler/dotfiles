@@ -62,7 +62,7 @@ hi Macro           guifg=#C4BE89               gui=italic
 hi SpecialKey      guifg=#66D9EF               gui=italic
 
 "hi MatchParen      guifg=#000000 guibg=#FD971F gui=bold
-hi MatchParen      guifg=#FD971F guibg=#000000 gui=bold
+hi MatchParen      guifg=#FD971F guibg=bg gui=bold
 hi ModeMsg         guifg=#E6DB74
 hi MoreMsg         guifg=#E6DB74
 hi Operator        guifg=#F92672
@@ -103,8 +103,10 @@ hi Type            guifg=#66D9EF               gui=none
 hi Underlined      guifg=#808080               gui=underline
 
 hi VertSplit       guifg=#808080 guibg=#080808 gui=bold
-hi VisualNOS                     guibg=#403D3D
-hi Visual                        guibg=#403D3D
+"hi VisualNOS                     guibg=#403D3D
+"hi Visual                        guibg=#403D3D
+hi VisualNOS                     guibg=#606070
+hi Visual                        guibg=#606070
 hi WarningMsg      guifg=#FFFFFF guibg=#333333 gui=bold
 hi WildMenu        guifg=#66D9EF guibg=#000000
 
@@ -165,7 +167,8 @@ if &t_Co > 255
 
    hi Directory       ctermfg=118               cterm=bold
    hi Error           ctermfg=219 ctermbg=89
-   hi ErrorMsg        ctermfg=199 ctermbg=16    cterm=bold
+   "hi ErrorMsg        ctermfg=199 ctermbg=16    cterm=bold
+   hi ErrorMsg        ctermfg=199 ctermbg=none    cterm=bold
    hi Exception       ctermfg=118               cterm=bold
    hi Float           ctermfg=135
    hi FoldColumn      ctermfg=67  ctermbg=16
@@ -181,7 +184,7 @@ if &t_Co > 255
    hi SpecialKey      ctermfg=81
 
    "hi MatchParen      ctermfg=233  ctermbg=208 cterm=bold
-   hi MatchParen      ctermfg=208  ctermbg=233 cterm=bold
+   hi MatchParen      ctermfg=208  ctermbg=none cterm=bold
    hi ModeMsg         ctermfg=229
    hi MoreMsg         ctermfg=229
    hi Operator        ctermfg=161
@@ -201,7 +204,8 @@ if &t_Co > 255
    " marks column
    hi SignColumn      ctermfg=118 ctermbg=235
    hi SpecialChar     ctermfg=161               cterm=bold
-   hi SpecialComment  ctermfg=245               cterm=bold
+   "hi SpecialComment  ctermfg=245               cterm=bold
+   hi SpecialComment  ctermfg=250               cterm=bold
    hi Special         ctermfg=81
    if has("spell")
        hi SpellBad                ctermbg=52
@@ -223,15 +227,19 @@ if &t_Co > 255
    hi Underlined      ctermfg=244               cterm=underline
 
    hi VertSplit       ctermfg=244 ctermbg=232   cterm=bold
-   hi VisualNOS                   ctermbg=238
-   hi Visual                      ctermbg=235
+   "hi VisualNOS                   ctermbg=238
+   "hi Visual                      ctermbg=235
+   hi VisualNOS                   ctermbg=240
+   hi Visual                      ctermbg=238
    hi WarningMsg      ctermfg=231 ctermbg=238   cterm=bold
    hi WildMenu        ctermfg=81  ctermbg=16
 
-   hi Comment         ctermfg=59
+   "hi Comment         ctermfg=59
+   hi Comment         ctermfg=245
    hi CursorColumn                ctermbg=236
    hi ColorColumn                 ctermbg=236
-   hi LineNr          ctermfg=250 ctermbg=236
+   "hi LineNr          ctermfg=250 ctermbg=236
+   hi LineNr          ctermfg=250 ctermbg=230
    hi NonText         ctermfg=59
 
    hi SpecialKey      ctermfg=59
@@ -248,10 +256,12 @@ if &t_Co > 255
        hi Conditional     ctermfg=197               cterm=bold
        hi Constant        ctermfg=141               cterm=bold
 
-       hi DiffDelete      ctermfg=125 ctermbg=233
+       "hi DiffDelete      ctermfg=125 ctermbg=233
+       hi DiffDelete      ctermfg=125 ctermbg=240
 
        hi Directory       ctermfg=154               cterm=bold
-       hi Error           ctermfg=222 ctermbg=233
+       "hi Error           ctermfg=222 ctermbg=233
+       hi Error           ctermfg=222 ctermbg=240
        hi Exception       ctermfg=154               cterm=bold
        hi Float           ctermfg=141
        hi Function        ctermfg=154
@@ -266,10 +276,13 @@ if &t_Co > 255
        hi Statement       ctermfg=197               cterm=bold
        hi Tag             ctermfg=197
        hi Title           ctermfg=203
-       hi Visual                      ctermbg=238
+       "hi Visual                      ctermbg=238
+       hi Visual                      ctermbg=240
 
-       hi Comment         ctermfg=244
-       hi LineNr          ctermfg=239 ctermbg=235
+       "hi Comment         ctermfg=244
+       hi Comment         ctermfg=250
+       "hi LineNr          ctermfg=239 ctermbg=235
+       hi LineNr          ctermfg=239 ctermbg=230
        hi NonText         ctermfg=239
        hi SpecialKey      ctermfg=239
    endif
@@ -277,9 +290,9 @@ end
 
 " Must be at the end, because of ctermbg=234 bug.
 " https://groups.google.com/forum/#!msg/vim_dev/afPqwAFNdrU/nqh6tOM87QUJ
-set background=dark
+"set background=dark
 
 " Transparency
-"hi Normal ctermbg=none
-"hi NonText ctermbg=none
-"hi LineNr ctermbg=none
+hi Normal ctermbg=none
+hi NonText ctermbg=none
+hi LineNr ctermbg=234
