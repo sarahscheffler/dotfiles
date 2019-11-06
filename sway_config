@@ -18,10 +18,13 @@ set $term gnome-terminal
 #Background
 set $bg /home/sscheff/Pictures/GraveArtoriasFinalWP.png
 set $bg2 /home/sscheff/Pictures/oscarofastora.jpg
+set $screenshots /home/sscheff/Pictures/Screenshots/
 
 # Your preferred application launcher
 # Note: it's recommended that you pass the final command to sway
-set $menu dmenu_path | dmenu | xargs swaymsg exec
+#set $menu | dmenu_path | dmenu | xargs swaymsg exec
+set $menu dmenu_run | xargs swaymsg exec
+#did that because dmenu wasn't getting the proper path
 
 ### Output configuration
 #
@@ -31,9 +34,21 @@ output * bg $bg fill
 # Example configuration:
 #
 #   output HDMI-A-1 resolution 1920x1080 position 1920,0
-output DP-1 pos 0 0
-output eDP-1 pos 0 1080
+#output DP-1 pos 0 0
+#output eDP-1 pos 800 2160
+
+output 'Unknown HP Z27 CN4838011T' pos 0 0
+output 'Sharp Corporation 0x1484 0x00000000' pos 800 2160
+
+#output 'Sharp Corporation 0x1484 0x00000000' pos 500 1080
+#output 'Lenovo Group Limited LEN T23i-10 V301LA2D' pos 0 0
+#output 'Acer Technologies XG270HU T1TAA0018500' pos 0 0 res 2560x1440
+#output 'Sharp Corporation 0x1484 0x00000000' pos 0 1440 res 1920x1080
 # You can get the names of your outputs by running: swaymsg -t get_outputs
+
+
+# Notification daemon
+exec /home/sscheff/Software/mako-1.4/build/mako --default-timeout 3000 --ignore-timeout 1
 
 ### Idle configuration
 #
@@ -59,7 +74,7 @@ output eDP-1 pos 0 1080
 #       natural_scroll enabled
 #       middle_emulation enabled
 #   }
-input 1739:30383:DELL07E6:00_06CB:76AF_To {
+input 1739:30383:DELL07E6:00_06CB:76AF_Touchpad {
     accel_profile flat
     pointer_accel 0.1
     tap enabled
@@ -112,7 +127,8 @@ input 1739:30383:DELL07E6:00_06CB:76AF_To {
     bindsym XF86MonBrightnessUp exec brightnessctl s +5%
     # Brightness down
     bindsym XF86MonBrightnessDown exec brightnessctl s 5%-
-    # TODO: printscreen, F7, F8, F9, whatever alt home/end are
+    # TODO:F7, F8, F9, whatever alt home/end are
+    # TODO brightness 1 when at sufficiently low threshold
 
 #
 # Moving around:
@@ -142,23 +158,23 @@ input 1739:30383:DELL07E6:00_06CB:76AF_To {
 # Workspaces:
 #
     # switch to workspace
-    bindsym $mod+1 workspace 1
-    bindsym $mod+2 workspace 2
+    bindsym $mod+1 workspace 1:signal
+    bindsym $mod+2 workspace 2:main
     bindsym $mod+3 workspace 3
-    bindsym $mod+4 workspace 4
+    bindsym $mod+4 workspace 4:spotify
     bindsym $mod+5 workspace 5
-    bindsym $mod+6 workspace 6
+    bindsym $mod+6 workspace 6:slack
     bindsym $mod+7 workspace 7
     bindsym $mod+8 workspace 8
     bindsym $mod+9 workspace 9
     bindsym $mod+0 workspace 10
     # move focused container to workspace
-    bindsym $mod+Shift+1 move container to workspace 1
-    bindsym $mod+Shift+2 move container to workspace 2
+    bindsym $mod+Shift+1 move container to workspace 1:signal
+    bindsym $mod+Shift+2 move container to workspace 2:main
     bindsym $mod+Shift+3 move container to workspace 3
-    bindsym $mod+Shift+4 move container to workspace 4
+    bindsym $mod+Shift+4 move container to workspace 4:spotify
     bindsym $mod+Shift+5 move container to workspace 5
-    bindsym $mod+Shift+6 move container to workspace 6
+    bindsym $mod+Shift+6 move container to workspace 6:slack
     bindsym $mod+Shift+7 move container to workspace 7
     bindsym $mod+Shift+8 move container to workspace 8
     bindsym $mod+Shift+9 move container to workspace 9
@@ -213,22 +229,33 @@ mode "resize" {
     # right will grow the containers width
     # up will shrink the containers height
     # down will grow the containers height
-    bindsym $left resize shrink width 10px
-    bindsym $down resize shrink height 10px
-    bindsym $up resize grow height 10px
-    bindsym $right resize grow width 10px
+    bindsym $left resize shrink width 50px
+    bindsym $down resize shrink height 50px
+    bindsym $up resize grow height 50px
+    bindsym $right resize grow width 50px
 
     # ditto, with arrow keys
-    bindsym Left resize shrink width 10px
-    bindsym Down resize shrink height 10px
-    bindsym Up resize grow height 10px
-    bindsym Right resize grow width 10px
+    bindsym Left resize shrink width 50px
+    bindsym Down resize shrink height 50px
+    bindsym Up resize grow height 50px
+    bindsym Right resize grow width 50px
 
     # return to default mode
     bindsym Return mode "default"
     bindsym Escape mode "default"
 }
 bindsym $mod+r mode "resize"
+
+# Sceenshotting
+# PrtScr - save whole screen to file
+# Shift+PrintScr - select region and save to file
+# Ctrl+PrtScr - save whole screen to clipboard
+# Ctrl+Shift+PrintScr - select region and save to clipboard
+bindsym Print exec grim $screenshots/$(date +'%Y-%m-%d-%H%M%S-grim.png')
+bindsym Shift+Print exec grim -g "$(slurp)" $screenshots/$(date +'%Y-%m-%d-%H%M%S-grim.png')
+bindsym Control_L+Print exec grim - | wl-copy
+bindsym Control_L+Shift+Print exec grim -g "$(slurp)" | wl-copy
+
 
 #
 # Status Bar:
@@ -259,5 +286,6 @@ exec swayidle -w \
     timeout 300 'swaymsg "output * dpms off"' \
     resume 'swaymsg "output * dpms on"' \
     before-sleep "$swaylock_command"
+
 
 include /etc/sway/config.d/*
