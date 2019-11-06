@@ -19,6 +19,8 @@ set expandtab
 set showmatch
 " Do not wrap text that is too long
 set nowrap
+" Allow editing multiple buffers without saving
+set hidden
 
 " Redefine <leader> to ',' because '\' is really far away
 let mapleader = ","
@@ -41,7 +43,7 @@ syntax on
 colorscheme molokai
 
 " default linewrap 79
-set tw=119
+set tw=99
 
 " spellcheck
 "set spell
@@ -71,6 +73,8 @@ set backspace=indent,eol,start
 " ,s gets ready to substitute all occurrences of the word under the cursor
 nnoremap <Leader>s :%s/\<<C-r><C-w>\>//g<Left><Left>
 
+" LaTeX compilation
+nnoremap <Leader>ll :Latexmk<Enter>
 
 " vim commands go to clipboard
 "set clipboard=unnamed
@@ -78,16 +82,10 @@ nnoremap <Leader>s :%s/\<<C-r><C-w>\>//g<Left><Left>
 " Plugins moved to nvim config! Raw vim will not use them.
 
 " set window navigation to alt+hjkl
-nmap <silent> ˙ :wincmd h<CR>
-nmap <silent> ∆ :wincmd j<CR>
-nmap <silent> ˚ :wincmd k<CR>
-nmap <silent> ¬ :wincmd l<CR>
-nmap <silent> <C-l> :bnext<CR>
-nmap <silent> <C-h> :bprevious<CR>
-"nmap <silent> <A-Left> :wincmd h<CR> "these conflict with tmux bindings
-"nmap <silent> <A-Down> :wincmd j<CR>
-"nmap <silent> <A-Up> :wincmd k<CR>
-"nmap <silent> <A-Right> :wincmd l<CR>
+nnoremap <silent> <C-H> <C-W><C-H>
+nnoremap <silent> <C-J> <C-W><C-J>
+nnoremap <silent> <C-K> <C-W><C-K>
+nnoremap <silent> <C-L> <C-W><C-L>
 " create  newly created windows on the right
 set splitright
 set splitbelow
