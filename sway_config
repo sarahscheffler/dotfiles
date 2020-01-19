@@ -48,7 +48,7 @@ output 'Sharp Corporation 0x1484 0x00000000' pos 800 2160
 
 
 # Notification daemon
-exec /home/sscheff/Software/mako-1.4/build/mako --default-timeout 3000 --ignore-timeout 1
+#exec /home/sscheff/Software/mako-1.4/build/mako --default-timeout 3000 --ignore-timeout 1
 
 ### Idle configuration
 #
