@@ -14,7 +14,7 @@ set $down j
 set $up k
 set $right l
 # Your preferred terminal emulator
-set $term gnome-terminal
+set $term alacritty
 #Background
 set $bg /home/sscheff/Pictures/GraveArtoriasFinalWP.png
 set $bg2 /home/sscheff/Pictures/oscarofastora.jpg
@@ -34,11 +34,17 @@ output * bg $bg fill
 # Example configuration:
 #
 #   output HDMI-A-1 resolution 1920x1080 position 1920,0
-#output DP-1 pos 0 0
-#output eDP-1 pos 800 2160
 
-output 'Unknown HP Z27 CN4838011T' pos 0 0
-output 'Sharp Corporation 0x1484 0x00000000' pos 800 2160
+### NORMAL SCHOOL SETUP
+#TODO: Write script for changing between these automatically
+#output 'Unknown HP Z27 CN4838011T' pos 0 0
+#output 'Sharp Corporation 0x1484 0x00000000' pos 800 2160
+
+#output 'Samsung Electric Company S22C150 H4LD403791' pos 0 0
+#output 'Sharp Corporation 0x1484 0x00000000' pos 1920 0
+
+output 'Dell Inc. DELL ST2010 5PN1H06316ES' resolution 1600x900 pos 0 0
+output 'Sharp Corporation 0x1484 0x00000000'  res 1920x1080 pos 1600 0
 
 #output 'Sharp Corporation 0x1484 0x00000000' pos 500 1080
 #output 'Lenovo Group Limited LEN T23i-10 V301LA2D' pos 0 0
