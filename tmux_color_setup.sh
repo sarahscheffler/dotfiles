@@ -1,7 +1,4 @@
 TMUX_INACTIVE="colour239"
-#TMUX_INACTIVE="colour256"
-#TMUX_BG="colour235"
-#TMUX_BG="colour235"
 TMUX_LIGHTTEXTCOLOR="colour231"
 TMUX_DARKTEXTCOLOR="colour233"
 TMUX_LIGHTCOLORS=(3 7 10 11 14 15 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47
@@ -17,7 +14,6 @@ TMUX_HOSTCOLOR=$(hostname | sum | awk '{print ($1 % 256)}')
 tmux set-environment -g TMUX_HOSTCOLOR "${TMUX_HOSTCOLOR}"
 
 tmux set-environment -g TMUX_INACTIVE "${TMUX_INACTIVE}"
-#tmux set-environment -g TMUX_BG "${TMUX_BG}"
 tmux set-environment -g TMUX_LIGHTTEXTCOLOR "${TMUX_LIGHTTEXTCOLOR}"
 tmux set-environment -g TMUX_DARKTEXTCOLOR "${TMUX_DARKTEXTCOLOR}"
 TMUX_ACTIVE="colour$(tmux show-environment -g TMUX_HOSTCOLOR | sed 's/^TMUX_HOSTCOLOR=//')"
@@ -32,36 +28,22 @@ fi
 tmux set-environment -g TMUX_TEXTCOLOR "${TMUX_TEXTCOLOR}"
 
 # status bar colors
-tmux set -g status-fg $TMUX_TEXTCOLOR
-tmux set -g status-bg $TMUX_ACTIVE
-tmux set -g status-attr default #TODO check this
-tmux setw -g window-status-current-fg $TMUX_ACTIVE
-tmux setw -g window-status-current-bg $TMUX_TEXTCOLOR
-tmux setw -g window-status-current-attr bright
+tmux set -g status-style fg=$TMUX_TEXTCOLOR,bg=$TMUX_ACTIVE
+tmux setw -g window-status-current-style fg=$TMUX_ACTIVE,bg=$TMUX_TEXTCOLOR,bright
 tmux setw -g window-status-format " #I:#W "
 tmux setw -g window-status-current-format " #I:#W "
-tmux setw -g window-status-fg $TMUX_TEXTCOLOR
-tmux setw -g window-status-bg $TMUX_ACTIVE
-tmux setw -g window-status-attr dim
+tmux setw -g window-status-style fg=$TMUX_TEXTCOLOR,bg=$TMUX_ACTIVE,dim
+tmux setw -g window-status-bell-style fg=$TMUX_TEXTCOLOR,bg=$TMUX_ACTIVE,bright
 
-tmux setw -g window-status-bell-attr bright
-tmux setw -g window-status-bell-fg $TMUX_TEXTCOLOR
-tmux setw -g window-status-bell-bg $TMUX_ACTIVE
 
 # pane colors
-tmux set -g pane-active-border-fg $TMUX_ACTIVE
-#tmux set -g pane-active-border-bg $TMUX_BG
-tmux set -g pane-border-fg $TMUX_INACTIVE
-#tmux set -g pane-border-bg $TMUX_BG
+tmux set -g pane-active-border-style fg=$TMUX_ACTIVE
+tmux set -g pane-border-style fg=$TMUX_INACTIVE
 tmux set -g display-panes-active-colour $TMUX_ACTIVE
 tmux set -g display-panes-colour $TMUX_TEXTCOLOR
 
 # mesage/command colors
-tmux set -g message-fg $TMUX_TEXTCOLOR
-tmux set -g message-bg $TMUX_ACTIVE
-tmux set -g message-attr bright #TODO check
+tmux set -g message-style fg=$TMUX_TEXTCOLOR,bg=$TMUX_ACTIVE,bright
 
 # mode switch colors
-tmux setw -g mode-fg $TMUX_TEXTCOLOR
-tmux setw -g mode-bg $TMUX_ACTIVE
-tmux setw -g mode-attr default
+tmux setw -g mode-style fg=$TMUX_TEXTCOLOR,bg=$TMUX_ACTIVE
