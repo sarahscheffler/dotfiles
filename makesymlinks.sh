@@ -6,7 +6,7 @@ SWAY=$CONFIG/sway
 NVIM=$CONFIG/nvim
 DOTFILES=$HOME/dotfiles
 BACKUP=$HOME/backup_dotfiles
-FILES="bashrc vimrc tmux.conf"
+FILES="bashrc profile vimrc tmux.conf"
 
 VIMCOLORS=$HOME/.vim/colors
 # Colorscheme originally from here:

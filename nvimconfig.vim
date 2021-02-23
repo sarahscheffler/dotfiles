@@ -2,6 +2,21 @@ set runtimepath^=~/.vim runtimepath+=~/.vim/after
 let &packpath = &runtimepath
 source ~/.vimrc
 
+
+"let g:plugs_disabled = ['vim-markdown-composer']
+"function! plug_disable#commit()
+  "for name in g:plugs_disabled
+    "if has_key(g:plugs, name)
+      "call remove(g:plugs, name)
+    "endif
+"
+    "let idx = index(g:plugs_order, name)
+    "if idx > -1
+      "call remove(g:plugs_order, idx)
+    "endif
+  "endfor
+"endfunction
+
 if empty(glob('~/.vim/autoload/plug.vim'))
     silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
                 \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
@@ -25,9 +40,33 @@ Plug 'junegunn/fzf' "multi entry selection
 Plug 'Shougo/echodoc.vim' "function signature, inline, etc
 Plug 'kshenoy/vim-signature' "show marks
 Plug 'neomake/neomake' "Linting for C++
+Plug 'metakirby5/codi.vim' "Scratchpad
+Plug 'mechatroner/rainbow_csv' "Rainbow CSV
 
+" Workaround for wl-clipboard bug on opening folders:
+" Enable system clipboard integration
+"set clipboard+=unnamedplus
+" Workaround for neovim wl-clipboard and netrw interaction hang 
+" (see: https://github.com/neovim/neovim/issues/6695 and https://github.com/neovim/neovim/issues/9806) 
+let g:clipboard = {
+      \   'name': 'myClipboard',
+      \   'copy': {
+      \      '+': 'wl-copy',
+      \      '*': 'wl-copy',
+      \    },
+      \   'paste': {
+      \      '+': 'wl-paste -o',
+      \      '*': 'wl-paste -o',
+      \   },
+      \   'cache_enabled': 0,
+      \ }
 
-"Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' } "neovim language server protocol
+" neovim language server protocol
+"Plug 'autozimu/LanguageClient-neovim', { 
+            "\ 'branch': 'next',
+            "\ 'do': 'bash install.sh',
+            "\ }
+
 "Plug 'roxma/nvim-completion-manager' "completion manager for neovim
 "Plug 'neomake/neomake' "make for neovim
 "call neomake#configure#automake('w') "run neomake when writing
@@ -35,32 +74,46 @@ Plug 'neomake/neomake' "Linting for C++
 " call neomake#configure#automake('rw',1000) "when reading and writing
 
 " TODO: This doesn't close when closing nvim; figure out why
-function! BuildComposer(info)
-    if a:info.status != 'unchanged' || a:info.force
-        if has('nvim')
-            !cargo build --release
-        else
-            !cargo build --release --no-default-features --features json-rpc
-        endif
-    endif
-endfunction
-let g:markdown_composer_custom_css = ["file:///Users/firechant/dotfiles/css_for_vmc.css"] " custom css
-Plug 'euclio/vim-markdown-composer', { 'do': function('BuildComposer') } " markdown rendering
-
-
+"function! BuildComposer(info)
+    "if a:info.status != 'unchanged' || a:info.force
+        "if has('nvim')
+            "!cargo build --release
+        "else
+            "!cargo build --release --no-default-features --features json-rpc
+        "endif
+    "endif
+"endfunction
+"let g:markdown_composer_custom_css = ["file:///Users/firechant/dotfiles/css_for_vmc.css"] " custom css
+"Plug 'euclio/vim-markdown-composer', { 'do': function('BuildComposer') } " markdown rendering
 
 call plug#end()
 
+
+
+
+" Codi shortcuts
+let g:codi#interpreters = {
+    \ 'python3': {
+        \ 'bin': 'python3',
+        \ 'prompt': '^\(>>>\|\.\.\.\) ',
+        \ },
+    \ }
+
+let g:codi#aliases = {
+    \ 'py3': 'python3',
+    \ }
+
 "" LanguageClient integration
-"set hidden
-"let g:LanguageClient_serverCommands = {
-    "\ 'rust': ['rustup', 'run', 'nightly', 'rls'],
-    "\ }
-"let g:LanguageClient_autoStart = 1
-"noremap <silent> K :call LanguageClient_textDocument_hover()<CR>
-"noremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
-"noremap <silent> <F6> :call LanguageClient_textDocument_rename()<CR>
-"
+set hidden
+let g:LanguageClient_serverCommands = {
+    \ 'rust': ['rustup', 'run', 'nightly', 'rls'],
+    \ 'markdown': ['mdpls']
+    \ }
+let g:LanguageClient_autoStart = 1
+noremap <silent> K :call LanguageClient_textDocument_hover()<CR>
+noremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
+noremap <silent> <F6> :call LanguageClient_textDocument_rename()<CR>
+
 "" nvim-completion-manager settings
 "" start newline when exiting menu
 "inoremap <expr> <CR> (pumvisible() ? "\<c-y>\<cr>" : "\<CR>") 

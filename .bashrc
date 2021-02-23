@@ -1,70 +1,53 @@
-#colored command line based on hostname/username
-export PS1="\[\033[38;5;$(whoami | sum | awk '{print 1 + ($1 % 255)}')m\]\u\[$(tty -s && tput sgr0)\]\[\033[38;5;m\]@\[$(tty -s && tput sgr0)\]\[\033[38;5;$(hostname | sum | awk '{print 1 + ($1 % 255)}')m\]\h\[$(tty -s && tput sgr0)\]\[\033[38;5;230m\]:\[$(tty -s && tput sgr0)\]\[\033[38;5;$(pwd | sum | awk '{print 1 + ($1 % 255)}')m\]\w\[$(tty -s && tput sgr0)\]\[\033[38;5;230m\]\$\[$(tty -s && tput sgr0)\] "
-#export PS1="\[\033[38;5;$(whoami | sum | awk '{print 1 + ($1 % 255)}')m\]\u\[$(tput sgr0)\]\[\033[38;5;m\]@\[$(tput sgr0)\]\[$(tput bold)\]\[\033[38;5;$(hostname | sum | awk '{print 1 + ($1 % 255)}')m\]\h\[$(tput sgr0)\]\[\033[38;5;230m\]:\[$(tput sgr0)\]\[\033[38;5;$(pwd | sum | awk '{print 1 + ($1 % 255)}')m\]\w\[$(tput sgr0)\]\[\033[38;5;230m\]\$\[$(tput sgr0)\] "
+# .bashrc
 
-# Homebrew if we're on Mac OS
-if [ "$(uname)" == "Darwin" ]; then
-    PATH=/usr/local/Cellar/:$PATH
+# Source global definitions
+if [ -f /etc/bashrc ]; then
+	. /etc/bashrc
 fi
 
-# Add /usr/local/bin to $PATH
-PATH=/usr/local/bin:$PATH
+######## Changes to PATH ########
+# Changes in PATH have been moved to ~/.profile
+. $HOME/.profile
 
-# if it exists, add /Library/TeX/texbin to PATH
-if [ -d "/Library/TeX" ]; then
-    PATH=/Library/TeX/texbin:$PATH
-fi
+# Uncomment the following line if you don't like systemctl's auto-paging feature:
+# export SYSTEMD_PAGER=
 
-# better octal dump
+######## Colored command line based on hostname/username ########
+#export PS1="\[\033[38;5;$(whoami | sum | awk '{print ($1 % 256)}')m\]\u\[$(tty -s && tput sgr0)\]\[\033[38;5;m\]@\[$(tty -s && tput sgr0)\]\[\033[38;5;$(hostname | sum | awk '{print ($1 % 256)}')m\]\h\[$(tty -s && tput sgr0)\]\[\033[38;5;230m\]:\[$(tty -s && tput sgr0)\]\[\033[38;5;$(pwd | sum | awk '{print 1 + ($1 % 255)}')m\]\w\[$(tty -s && tput sgr0)\]\[\033[38;5;230m\]\$\[$(tty -s && tput sgr0)\] "
+export PS1="\[\033[38;5;$(whoami | sum | awk '{print ($1 % 256)}')m\]\u\[$(tty -s && tput sgr0)\]@\[$(tty -s && tput sgr0)\]\[\033[38;5;$(hostname | sum | awk '{print ($1 % 256)}')m\]\h\[$(tty -s && tput sgr0)\]\[\033[38;5;230m\]:\[$(tty -s && tput sgr0)\]\[\033[38;5;$(pwd | sum | awk '{print 1 + ($1 % 255)}')m\]\w\[$(tty -s && tput sgr0)\]\[\033[38;5;230m\]\\$\[$(tty -s && tput sgr0)\] "
+
+#export GTK2_RC_FILES="$HOME/.config/gtk-3.0/settings.ini"
+#export GTK_THEME=Adwaita:dark
+
+######## Changed/additional commands ########
 alias od="od -A x -t x1"
-
-# src to source ~/.bashrc
 alias src="source $HOME/.bashrc"
+alias ls="ls -CF --color"
+alias swaylock="swaylock -i $HOME/Pictures/GraveArtoriasFinalWP.png"
+alias down="echo '/home/sscheff/Downloads/$(ls -t  /home/sscheff/Downloads | head -n 1)'"
 
-# make vim nvim
-if type nvim > /dev/null 2>&1; then
-    alias vim='nvim'
-fi
+# Location setting
+#CURRLOC=/tmp/sscheff.currloc.txt
+#touch ${CURRLOC}
+#setloc() {
+    #echo $(pwd) > ${CURRLOC}
+#}
+#cdloc() {
+    #cd $(cat ${CURRLOC})
+#}
+#cdloc # move to CURRLOC on terminal open
 
-# ls always lists folders wtih / and execs with *, and shows hidden files
-alias ls="ls -CF"
-
-# tmux assumes 256 color support, and reload source file to account for
-# background processes to finish
-alias tmux="tmux -2"
-
-# in tmux, panes with ssh include the hostname in their name
-ssh() {
-    if [ "$(ps -p $(ps -p $$ -o ppid=) -o comm=)" = "tmux" ]; then
-        tmux rename-window "ssh:$(echo $* | rev | cut -d ' ' -f1 | rev | cut -d . -f 1)"
-        command ssh "$@"
-        tmux set-window-option automatic-rename "on" 1>/dev/null
-    else
-        command ssh "$@"
-    fi
+######## PulseAudio stuff ########
+# Help from https://unix.stackexchange.com/questions/132230/read-out-pulseaudio-volume-from-commandline-i-want-pactl-get-sink-volume#164740
+getdefaultsinkname() {
+    pacmd stat | awk -F": " '/^Default sink name: /{printf $2}'
+}
+getdefaultsinkvol() {
+    pacmd list-sinks | awk '/^\s+name: /{indefault = $2 == "<'$(getdefaultsinkname)'>"} 
+                            /^\s+volume: / && indefault {printf $5; exit}'
+}
+getdefaultsinkmute() {
+    pacmd list-sinks | awk '/^\s+name: /{indefault = $2 == "<'$(getdefaultsinkname)'>"} 
+                            /^\s+muted: / && indefault {printf $2; exit}'
 }
 
-# Use vim for sudoedit (and others)
-export VISUAL=vim
-export EDITOR="$VISUAL"
-
-# Use emacs keys in the terminal
-set -o emacs
-
-# git gud maps to git --help
-git() { if [[ $@ == "gud" || $@ == "--gud" ]]; then command git --help; else command git "$@"; fi; }         
-
-# If we have cargo/rust, add it to path
-if [ -d "$HOME/.cargo" ]; then
-    PATH=$HOME/.cargo/bin:$PATH
-fi
-
-# If we have Rust, set RUST_SRC_PATH
-if [ -x /usr/local/bin/rustc ]; then
-    RUST_SRC_PATH="$(rustc --print sysroot)/lib/rustlib/src/rust/src"
-fi
-
-# If Skim exists where we expect it, alias skimpdf tool
-if [ -x /Applications/Skim.app/Contents/SharedSupport/skimpdf ]; then
-    alias skimpdf="/Applications/Skim.app/Contents/SharedSupport/skimpdf"
-fi

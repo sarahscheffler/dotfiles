@@ -42,8 +42,8 @@ syntax on
 " color scheme
 colorscheme molokai
 
-" default linewrap 79
-set tw=99
+" default linewrap
+set tw=229
 
 " spellcheck
 "set spell
