@@ -13,8 +13,8 @@ fi
 # export SYSTEMD_PAGER=
 
 ######## Colored command line based on hostname/username ########
-#export PS1="\[\033[38;5;$(whoami | sum | awk '{print ($1 % 256)}')m\]\u\[$(tty -s && tput sgr0)\]\[\033[38;5;m\]@\[$(tty -s && tput sgr0)\]\[\033[38;5;$(hostname | sum | awk '{print ($1 % 256)}')m\]\h\[$(tty -s && tput sgr0)\]\[\033[38;5;230m\]:\[$(tty -s && tput sgr0)\]\[\033[38;5;$(pwd | sum | awk '{print 1 + ($1 % 255)}')m\]\w\[$(tty -s && tput sgr0)\]\[\033[38;5;230m\]\$\[$(tty -s && tput sgr0)\] "
-export PS1="\[\033[38;5;$(whoami | sum | awk '{print ($1 % 256)}')m\]\u\[$(tty -s && tput sgr0)\]@\[$(tty -s && tput sgr0)\]\[\033[38;5;$(hostname | sum | awk '{print ($1 % 256)}')m\]\h\[$(tty -s && tput sgr0)\]\[\033[38;5;230m\]:\[$(tty -s && tput sgr0)\]\[\033[38;5;$(pwd | sum | awk '{print 1 + ($1 % 255)}')m\]\w\[$(tty -s && tput sgr0)\]\[\033[38;5;230m\]\\$\[$(tty -s && tput sgr0)\] "
+#export PS1="\[\033[38;5;$(whoami | sum | awk '{print ($1 % 256)}')m\]\u\[$(tty -s && tput sgr0)\]@\[$(tty -s && tput sgr0)\]\[\033[38;5;$(hostname | sum | awk '{print ($1 % 256)}')m\]\h\[$(tty -s && tput sgr0)\]\[\033[38;5;230m\]:\[$(tty -s && tput sgr0)\]\[\033[38;5;$(pwd | sum | awk '{print 1 + ($1 % 255)}')m\]\w\[$(tty -s && tput sgr0)\]\[\033[38;5;230m\]\\$\[$(tty -s && tput sgr0)\] "
+export PS1="[\[ $(tput sgr0)\]\[\033[38;5;$(whoami | sum | awk '{print ($1 % 256)}')m\]\u\[$(tput sgr0)\]@\[$(tput sgr0)\]\[\033[38;5;$(hostname | sum | awk '{print ($1 % 256)}')m\]\h\[$(tput sgr0)\]:\[$(tput sgr0)\]\[\033[38;5;$(pwd | sum | awk '{print ($1 % 256)}')m\]\w\[$(tput sgr0) \]]\\$ \[$(tput sgr0)\]"
 
 #export GTK2_RC_FILES="$HOME/.config/gtk-3.0/settings.ini"
 #export GTK_THEME=Adwaita:dark
