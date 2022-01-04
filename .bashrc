@@ -23,8 +23,18 @@ export PS1="[\[ $(tput sgr0)\]\[\033[38;5;$(whoami | sum | awk '{print ($1 % 256
 alias od="od -A x -t x1"
 alias src="source $HOME/.bashrc"
 alias ls="ls -CF --color"
-alias swaylock="swaylock -i $HOME/Pictures/GraveArtoriasFinalWP.png"
-alias down="echo '/home/sscheff/Downloads/$(ls -t  /home/sscheff/Downloads | head -n 1)'"
+
+if [[ -f "$HOME/Pictures/GraveArtoriasFinalWP.png" ]]
+then
+    alias swaylock="swaylock -i $HOME/Pictures/GraveArtoriasFinalWP.png"
+fi
+
+
+if [[ -d "$HOME/Downloads" ]]
+then
+    alias down="echo '$HOME/Downloads/$(ls -t  $HOME/Downloads | head -n 1)'"
+fi
+
 
 # Location setting
 #CURRLOC=/tmp/sscheff.currloc.txt
