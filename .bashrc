@@ -14,7 +14,7 @@ fi
 
 ######## Colored command line based on hostname/username ########
 RESET='$(tput sgr0)'
-export PS1="[ \[\033[38;5;$(whoami | sum | awk '{print ($1 % 256)}')m\]\u\[${RESET}\]@\[\033[38;5;$(hostname | sum | awk '{print ($1 % 256)}')m\]\h\[${RESET}\]:\[\033[38;5;$(pwd | sum | awk '{print ($1 % 256)}')m\]\w\[${RESET}\] ]\\$ "
+export PS1="\n[ \[\033[38;5;$(whoami | sum | awk '{print ($1 % 256)}')m\]\u\[${RESET}\]@\[\033[38;5;$(hostname | sum | awk '{print ($1 % 256)}')m\]\h\[${RESET}\]:\[\033[38;5;$(pwd | sum | awk '{print ($1 % 256)}')m\]\w\[${RESET}\] ]\\$ "
 
 #export GTK2_RC_FILES="$HOME/.config/gtk-3.0/settings.ini"
 #export GTK_THEME=Adwaita:dark
