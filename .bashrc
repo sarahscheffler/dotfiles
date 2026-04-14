@@ -35,34 +35,17 @@ if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
     debian_chroot=$(cat /etc/debian_chroot)
 fi
 
-# set a fancy prompt (non-color, unless we know we "want" color)
-case "$TERM" in
-    xterm-color|*-256color) color_prompt=yes;;
-esac
-
-# uncomment for a colored prompt, if the terminal has the capability; turned
-# off by default to not distract the user: the focus in a terminal window
-# should be on the output of commands, not on the prompt
-#force_color_prompt=yes
-
-if [ -n "$force_color_prompt" ]; then
-    if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
-	# We have color support; assume it's compliant with Ecma-48
-	# (ISO/IEC-6429). (Lack of such support is extremely rare, and such
-	# a case would tend to support setf rather than setaf.)
-	color_prompt=yes
-    else
-	color_prompt=
+# Detect terminal color support
+# color_prompt=256 if 256-color, color_prompt=yes if basic color, unset if none
+color_prompt=
+if [ -x /usr/bin/tput ] && tput setaf 1 &>/dev/null; then
+    ncolors=$(tput colors 2>/dev/null)
+    if [ "${ncolors:-0}" -ge 256 ] 2>/dev/null; then
+        color_prompt=256
+    elif [ "${ncolors:-0}" -ge 8 ] 2>/dev/null; then
+        color_prompt=yes
     fi
 fi
-
-# Comment out default color stuff
-#if [ "$color_prompt" = yes ]; then
-#    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
-#else
-#    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
-#fi
-unset color_prompt force_color_prompt
 
 # If this is an xterm set the title to user@host:dir
 case "$TERM" in
@@ -132,13 +115,24 @@ fi
 # Uncomment the following line if you don't like systemctl's auto-paging feature:
 # export SYSTEMD_PAGER=
 
+
+######## Extra logic to help PS1 not overwrite venv ########
+export VIRTUAL_ENV_DISABLE_PROMPT=1
+
+# Print " (venvname)" if a virtualenv is active
+_venv_ps1() {
+    if [ -n "$VIRTUAL_ENV" ]; then
+        printf " (%s)" "${VIRTUAL_ENV##*/}"
+    fi
+}
+
 ######## Colored command line based on hostname/username ########
 # RESET sets 0m, which resets the changes so far
 RESET='\[$(tput sgr0)\]'
 # 1 is bold
 # 38;5 means next input sets foreground color
 # \e is escape character, ake \033
-export PS1="\n[ \[\e[1;38;5;$(whoami | sum | awk '{print ($1 % 256)}')m\]\u${RESET}\[\e[1m\]@\[\e[38;5;$(hostname | sum | awk '{print ($1 % 256)}')m\]\h${RESET}\[\e[1m\]:\[\e[38;5;$(pwd | sum | awk '{print ($1 % 255)}')m\]\w${RESET} ]\\$ "
+export PS1="\n[ \[\e[1;38;5;$(whoami | sum | awk '{print ($1 % 256)}')m\]\u${RESET}\[\e[1m\]@\[\e[38;5;$(hostname | sum | awk '{print ($1 % 256)}')m\]\h${RESET}\[\e[1m\]:\[\e[38;5;$(pwd | sum | awk '{print ($1 % 255)}')m\]\w${RESET}\$( _venv_ps1 ) ]\n\\$ "
 
 #export GTK2_RC_FILES="$HOME/.config/gtk-3.0/settings.ini"
 #export GTK_THEME=Adwaita:dark
@@ -158,6 +152,23 @@ if [[ -d "$HOME/Downloads" ]]
 then
     alias down="echo '$HOME/Downloads/$(ls -t  $HOME/Downloads | head -n 1)'"
 fi
+
+# Print top n (default 1) files in downloads
+
+#down() {
+   # local n="${1:-1}" # default to 1 if no arg
+   # if [[ -d "$HOME/Downloads" ]]; then
+   #     find "$HOME/Downloads" -maxdepth 1 -type f -printf "%T@ %p\n" \
+   #     | sort -nr \
+   #     | head -n "$n" \
+   #     | cut -d' ' -f2-
+   # else
+   #     echo "Directory $HOME/Downloads does not exist"
+   #     return 1
+   # fi
+#}
+
+
 
 
 # Location setting
@@ -185,3 +196,11 @@ getdefaultsinkmute() {
                             /^\s+muted: / && indefault {printf $2; exit}'
 }
 
+. "$HOME/.cargo/env"
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+export PATH="$PATH:/home/sscheffl/.sp1/bin"
+export PATH=$PATH:/usr/local/go/bin
