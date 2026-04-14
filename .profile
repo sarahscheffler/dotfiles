@@ -6,13 +6,15 @@ PATH="/usr/local/bin:$PATH"
 # If we have snap, add it to path
 [ -d "/var/lib/snapd/snap/bin" ] && PATH="/var/lib/snapd/snap/bin:$PATH"
 
+### Rust
 # If we have cargo/rust, add it to path
 [ -d "$HOME/.cargo/bin" ] && PATH="$HOME/.cargo/bin:$PATH"
-
-# If we have Rust, set RUST_SRC_PATH
+# Source cargo tools if we hve them
+[ -f "$HOME/.cargo/env" ] && . "$HOME/.cargo/env"
+# Set RUST_SRC_PATH
 [ -d "/usr/local/bin/rustc" ] && RUST_SRC_PATH="$(rustc --print sysroot)/lib/rustlib/src/rust/src"
 
-# If we have Zotero, add it to path
+# Add Zotero
 [ -d "/opt/Zotero_linux-x86_64" ] && PATH="/opt/Zotero_linux-x86_64:$PATH"
 
 # Add CLion
@@ -24,9 +26,10 @@ PATH="/usr/local/bin:$PATH"
 # Add ZoKrates
 [ -d "/home/sscheffl/.zokrates/bin" ] && PATH="$PATH:/home/sscheffl/.zokrates/bin"
 
-# For jupyter: If we have ~/.local/bin, add it to path
-#[ -d "$HOME/.local/bin" ] && PATH="$PATH:$HOME/.local/bin"
+# Add SP1
+[ -d "$HOME/.sp1/bin" ] && PATH="$PATH:$HOME/.sp1/bin"
+
+# Add Go
+[ -d "/usr/local/go/bin" ] && PATH="$PATH:/usr/local/go/bin"
 
 export PATH
-
-. "$HOME/.cargo/env"
