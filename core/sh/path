@@ -1,0 +1,41 @@
+######## Changes to PATH ########
+
+pathadd() {
+  case ":$PATH:" in
+    *":$1:"*) ;;
+    *) PATH="$1:$PATH" ;;
+  esac
+}
+
+# Standard bin items
+pathadd "$HOME/bin"
+pathadd "$HOME/.local/bin"
+pathadd "/usr/local/bin"
+
+# Snap
+[ -d "/var/lib/snapd/snap/bin" ] && pathadd "/var/lib/snapd/snap/bin"
+
+# Rust
+[ -d "$HOME/.cargo/bin" ] && pathadd "$HOME/.cargo/bin"
+[ -f "$HOME/.cargo/env" ] && . "$HOME/.cargo/env"
+[ -d "/usr/local/bin/rustc" ] && RUST_SRC_PATH="$(rustc --print sysroot)/lib/rustlib/src/rust/src"
+
+# Zotero
+[ -d "/opt/Zotero_linux-x86_64" ] && pathadd "/opt/Zotero_linux-x86_64"
+
+# CLion
+[ -d "$HOME/Software/clion-2019.3.2/bin" ] && pathadd "$HOME/Software/clion-2019.3.2/bin"
+
+# TeXLive
+[ -d "/usr/local/texlive/2025/bin/x86_64-linux" ] && pathadd "/usr/local/texlive/2025/bin/x86_64-linux"
+
+# ZoKrates
+[ -d "$HOME/.zokrates/bin" ] && pathadd "$HOME/.zokrates/bin"
+
+# SP1
+[ -d "$HOME/.sp1/bin" ] && pathadd "$HOME/.sp1/bin"
+
+# Go
+[ -d "/usr/local/go/bin" ] && pathadd "/usr/local/go/bin"
+
+export PATH
