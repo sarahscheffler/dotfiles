@@ -3,7 +3,7 @@ DOTFILES=$HOME/dotfiles
 BACKUP=$HOME/backup_dotfiles
 mkdir -p "$BACKUP"
 
-for file in bashrc bash_profile; do
+for file in bashrc bash_profile bash_utils; do
     [ -f "$HOME/.$file" ] && mv "$HOME/.$file" "$BACKUP"
     ln -sfv "$DOTFILES/core/bash/$file" "$HOME/.$file"
 done

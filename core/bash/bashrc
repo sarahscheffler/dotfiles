@@ -120,12 +120,13 @@ _venv_ps1() {
 }
 
 ######## PS1, Colored command line based on hostname/username ########
+[[ -f $HOME/.bash_utils ]] && source $HOME/.bash_utils
 # RESET sets 0m, which resets the changes so far
 RESET='\[$(tput sgr0)\]'
 # 1 is bold
 # 38;5 means next input sets foreground color
 # \e is escape character, ake \033
-export PS1="\n[ \[\e[1;38;5;$(whoami | sum | awk '{print ($1 % 256)}')m\]\u${RESET}\[\e[1m\]@\[\e[38;5;$(hostname | sum | awk '{print ($1 % 256)}')m\]\h${RESET}\[\e[1m\]:\[\e[38;5;$(pwd | sum | awk '{print ($1 % 255)}')m\]\w${RESET}\$( _venv_ps1 ) ]\n\\$ "
+export PS1="\n[ \[\e[1;38;5;$(_color_whoami)m\]\u${RESET}\[\e[1m\]@\[\e[38;5;$(_color_hostname)m\]\h${RESET}\[\e[1m\]:\[\e[38;5;$(_color_pwd)m\]\w${RESET}\$( _venv_ps1 ) ]\n\\$ "
 
 # If this is an xterm set the title to user@host:dir
 case "$TERM" in

@@ -1,3 +1,6 @@
+#!/bin/bash
+[[ -f $HOME/.bash_utils ]] && source $HOME/.bash_utils
+
 TMUX_INACTIVE="colour239"
 TMUX_LIGHTTEXTCOLOR="colour231"
 TMUX_DARKTEXTCOLOR="colour233"
@@ -10,7 +13,7 @@ TMUX_LIGHTCOLORS=(3 7 10 11 14 15 40 41 42 43 44 45 46 47
 217 218 219 220 221 222 223 224 225 226 227 228 229 230 231 246 247 248 249 250 251
 252 253 254 255)
 # Set the "hostcolor" based on a hash of the hostname
-TMUX_HOSTCOLOR=$(hostname | sum | awk '{print ($1 % 256)}')
+TMUX_HOSTCOLOR=$(_color_hostname)
 tmux set-environment -g TMUX_HOSTCOLOR "${TMUX_HOSTCOLOR}"
 
 tmux set-environment -g TMUX_INACTIVE "${TMUX_INACTIVE}"

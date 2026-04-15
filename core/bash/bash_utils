@@ -1,0 +1,4 @@
+# Utility functions for use in bashrc and scripts
+_color_whoami() { whoami | sum | awk '{print ($1 % 256)}'; }
+_color_hostname() { hostname | sum | awk '{print ($1 % 256)}'; }
+_color_pwd() { pwd | sum | awk '{print ($1 % 255)}'; }
