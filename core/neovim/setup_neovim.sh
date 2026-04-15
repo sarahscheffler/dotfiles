@@ -5,4 +5,4 @@ NVIM=$HOME/.config/nvim
 mkdir -p "$BACKUP" "$NVIM"
 
 [ -f "$NVIM/init.vim" ] && mv "$NVIM/init.vim" "$BACKUP"
-ln -sfv "$DOTFILES/core/neovim/nvimconfig.vim" "$NVIM/init.vim"
+ln -sfv "$DOTFILES/core/neovim/vimplugconfig.vim" "$NVIM/vimplugconfig.vim"
