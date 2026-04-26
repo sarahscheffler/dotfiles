@@ -1,0 +1,74 @@
+// Place your key bindings in this file to override the defaults
+[
+    // Disable Insert key (prevent accidental overwrite mode)
+    {
+        "key": "insert",
+        "command": "-editor.action.toggleOvertypeInsertMode"
+    },
+
+    // Disable vim bindings for ctrl+c, ctrl+x, ctrl+v, ctrl+z
+    {
+        "key": "ctrl+c",
+        "command": "-extension.vim_ctrl+c"
+    },
+    {
+        "key": "ctrl+x",
+        "command": "-extension.vim_ctrl+x"
+    },
+    {
+        "key": "ctrl+v",
+        "command": "-extension.vim_ctrl+v"
+    },
+    {
+        "key": "ctrl+z",
+        "command": "-extension.vim_ctrl+z"
+    },
+
+    // Always make Ctrl+A select all (even in Vim normal mode)
+    {
+        "key": "ctrl+a",
+        "command": "editor.action.selectAll",
+        "when": "editorTextFocus"
+    },
+
+    // Rebind Ctrl+C, Ctrl+X, Ctrl+Z, Ctrl+Y to default copy, cut, paste, undo
+    {
+        "key": "ctrl+c",
+        "command": "editor.action.clipboardCopyAction",
+        "when": "textInputFocus && !inDebugRepl"
+    },
+    {
+        "key": "ctrl+x",
+        "command": "editor.action.clipboardCutAction",
+        "when": "textInputFocus && !inDebugRepl"
+    },
+    {
+        "key": "ctrl+z",
+        "command": "undo",
+        "when": "textInputFocus && !inDebugRepl"
+    },
+    {
+        "key": "ctrl+y",
+        "command": "redo",
+        "when": "textInputFocus && !inDebugRepl"
+    },
+
+    // Ctrl+V should behave normally in Vim normal mode, but paste in insert mode
+    // → In insert mode: perform regular paste
+    {
+        "key": "ctrl+v",
+        "command": "editor.action.clipboardPasteAction",
+        "when": "textInputFocus && vim.mode == 'Insert' && !inDebugRepl"
+    },
+    // → In normal mode: let Vim handle it (do NOT override)
+    {
+        "key": "ctrl+v",
+        "command": "extension.vim_ctrl+v",
+        "when": "editorTextFocus && vim.mode != 'Insert'"
+    },
+    {
+        "key": "ctrl+v",
+        "command": "-editor.action.clipboardPasteAction",
+        "when": "textInputFocus && vim.mode != 'Insert'"
+    }
+]

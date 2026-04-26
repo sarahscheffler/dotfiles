@@ -1,0 +1,32 @@
+{
+    "editor.semanticHighlighting.enabled": true,
+
+    // Error/warning colors
+    "workbench.colorCustomizations": {
+        // Warning colors
+        "editorWarning.background": "#55440080", // translucent background
+        "editorWarning.border": "#ffaa00", // underline
+        "editorWarning.foreground": "#ffcc00", // text color
+
+        // Error colors
+        "editorError.background": "#55000080", // translucent background
+        "editorError.border": "#ff0000", // underline
+        "editorError.foreground": "#ff6666" // text color
+    },
+    "editor.insertSpaces": false,
+    "github.copilot.nextEditSuggestions.enabled": true,
+    "workbench.editorAssociations": {
+        "*.copilotmd": "vscode.markdown.preview.editor",
+        "*.log": "default"
+    },
+    "files.associations": {
+        "*.log": "log"
+    },
+
+    // Add a bit of padding in terminal so you can see underscores
+    "terminal.integrated.lineHeight": 1.2,
+    "claudeCode.preferredLocation": "panel",
+    "explorer.confirmDragAndDrop": false,
+    "notebook.output.textLineLimit": 20,
+    "workbench.colorTheme": "Visual Studio Dark"
+}
