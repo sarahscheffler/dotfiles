@@ -64,6 +64,11 @@ done
 trap - EXIT
 mv "$tmpfile" "$ENABLED_FILE"
 
+# If Git exists, exclude optional/enabled from git so it can serve as local override
+if command -v git &> /dev/null; then
+    git update-index --skip-worktree $DOTFILES/optional/enabled
+fi
+
 ######## Activation ########
 # Reload tmux config if a session is running
 tmux source-file "$HOME/.tmux.conf" 2>/dev/null || true
