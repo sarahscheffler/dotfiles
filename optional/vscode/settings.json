@@ -28,5 +28,6 @@
     "claudeCode.preferredLocation": "panel",
     "explorer.confirmDragAndDrop": false,
     "notebook.output.textLineLimit": 20,
-    "workbench.colorTheme": "Visual Studio Dark"
+    "workbench.colorTheme": "Visual Studio Dark",
+    "telemetry.telemetryLevel": "off"
 }
