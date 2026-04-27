@@ -5,7 +5,7 @@ VSCODE=$HOME/.config/Code/User
 mkdir -p "$BACKUP" "$VSCODE"
 
 
-for file in settings.json keybindings.json; do
+for file in settings.json keybindings.json sscheffl.code-profile; do
 
     # Check if file is missing
     [ -f "$DOTFILES/optional/vscode/$file" ] || { echo "Source missing: $file"; continue; }
