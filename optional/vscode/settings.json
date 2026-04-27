@@ -29,5 +29,11 @@
     "explorer.confirmDragAndDrop": false,
     "notebook.output.textLineLimit": 20,
     "workbench.colorTheme": "Visual Studio Dark",
-    "telemetry.telemetryLevel": "off"
+    "telemetry.telemetryLevel": "off",
+    "chat.viewSessions.orientation": "stacked",
+    "editor.wordWrap": "on",
+
+    // Keep LaTeX scrolling at the last position
+    "latex-workshop.view.pdf.scrollMode": "keepLastPosition",
+    "latex-workshop.synctex.afterBuild.enabled": false
 }

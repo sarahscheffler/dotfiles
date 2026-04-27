@@ -3,9 +3,11 @@ DOTFILES=$HOME/dotfiles
 BACKUP=$HOME/backup_dotfiles
 VSCODE=$HOME/.config/Code/User
 mkdir -p "$BACKUP" "$VSCODE"
+mkdir -p "$BACKUP/profiles"
+mkdir -p "$VSCODE/profiles"
 
 
-for file in settings.json keybindings.json sscheffl.code-profile; do
+for file in settings.json keybindings.json profiles/sscheffl.code-profile; do
 
     # Check if file is missing
     [ -f "$DOTFILES/optional/vscode/$file" ] || { echo "Source missing: $file"; continue; }
@@ -16,4 +18,8 @@ for file in settings.json keybindings.json sscheffl.code-profile; do
     # Link new file
     ln -sfv "$DOTFILES/optional/vscode/$file" "$VSCODE/$file"
 done
+
+# Tell user to manually import code profile
+"You still need to manually import $VSCODE/profiles/sscheffl.code-profile into VSCode by doing Ctrl+Shift+P -> Profiles: Import Profile"
+
 
