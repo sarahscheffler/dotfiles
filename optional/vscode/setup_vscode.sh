@@ -20,6 +20,6 @@ for file in settings.json keybindings.json profiles/sscheffl.code-profile; do
 done
 
 # Tell user to manually import code profile
-"You still need to manually import $VSCODE/profiles/sscheffl.code-profile into VSCode by doing Ctrl+Shift+P -> Profiles: Import Profile"
+echo "[TODO] You still need to manually import $VSCODE/profiles/sscheffl.code-profile into VSCode by doing Ctrl+Shift+P -> Profiles: Import Profile"
 
 
