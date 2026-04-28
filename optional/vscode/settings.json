@@ -20,7 +20,8 @@
         "*.log": "default"
     },
     "files.associations": {
-        "*.log": "log"
+        "*.log": "log",
+        "*.tex": "latex"
     },
 
     // Add a bit of padding in terminal so you can see underscores
@@ -34,6 +35,7 @@
     "editor.wordWrap": "on",
 
     // Keep LaTeX scrolling at the last position
-    "latex-workshop.view.pdf.scrollMode": "keepLastPosition",
-    "latex-workshop.synctex.afterBuild.enabled": false
+    "latex-workshop.synctex.afterBuild.enabled": true,
+    "latex-workshop.view.pdf.reload.transition": "none"
+
 }
