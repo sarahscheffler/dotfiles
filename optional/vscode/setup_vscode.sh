@@ -33,6 +33,6 @@ else
 fi
 
 # Tell user to manually import code profile
-echo "You still need to manually import $VSCODE/profiles/sscheffl.code-profile into VSCode by doing Ctrl+Shift+P -> Profiles: Import Profile"
+echo "[TODO] You still need to manually import $VSCODE/profiles/sscheffl.code-profile into VSCode by doing Ctrl+Shift+P -> Profiles: Import Profile"
 
 

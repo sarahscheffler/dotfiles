@@ -176,4 +176,6 @@ if [ -d "$HOME/.nvm" ]; then
     [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
 fi
 
-
+# Import local items in bashrc if they exist
+LOCAL_RC="$HOME/dotfiles/local/$(hostname)/additional_bashrc_$(hostname)"
+[ -f "$LOCAL_RC" ] && source "$LOCAL_RC"
