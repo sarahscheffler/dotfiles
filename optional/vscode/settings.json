@@ -29,13 +29,31 @@
     "claudeCode.preferredLocation": "panel",
     "explorer.confirmDragAndDrop": false,
     "notebook.output.textLineLimit": 20,
-    "workbench.colorTheme": "Visual Studio Dark",
+    "workbench.colorTheme": "Aura Dark",
     "telemetry.telemetryLevel": "off",
     "chat.viewSessions.orientation": "stacked",
     "editor.wordWrap": "on",
 
     // Keep LaTeX scrolling at the last position
     "latex-workshop.synctex.afterBuild.enabled": true,
-    "latex-workshop.view.pdf.reload.transition": "none"
+    "latex-workshop.view.pdf.reload.transition": "none",
+
+    "[latex]": {
+        "editor.unicodeHighlight.allowedCharacters": {
+            "'": true
+        }
+    }
+
+    // Color customizations within Aura Dark
+    "editor.tokenColorCustomizations": {
+      "[Aura Dark]": {
+        "textMateRules": [
+          {
+            "scope": "support.function.custom.sstodo.latex",
+            "settings": { "foreground": "#FF6AC1", "fontStyle": "bold" }
+          }
+        ]
+      }
+}
 
 }

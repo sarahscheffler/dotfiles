@@ -1,0 +1,13 @@
+{
+  "name": "latex-custom-highlights",
+  "publisher": "local",
+  "version": "0.0.1",
+  "engines": { "vscode": "^1.0.0" },
+  "contributes": {
+    "grammars": [{
+      "scopeName": "latex.custom.injection",
+      "path": "./injection.tmLanguage.json",
+      "injectTo": ["text.tex.latex"]
+    }]
+  }
+}

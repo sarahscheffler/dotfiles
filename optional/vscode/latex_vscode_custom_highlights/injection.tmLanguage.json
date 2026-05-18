@@ -1,0 +1,14 @@
+{
+  "scopeName": "latex.custom.injection",
+  "injectionSelector": "L:text.tex.latex",
+  "patterns": [
+    {
+      "name": "support.function.custom.sstodo.latex",
+      "begin": "\\\\sstodo\\{",
+      "end": "\\}",
+      "patterns": [
+        { "begin": "\\{", "end": "\\}", "patterns": [{ "include": "$self" }] }
+      ]
+    }
+  ]
+}
