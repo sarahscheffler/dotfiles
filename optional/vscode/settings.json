@@ -42,7 +42,7 @@
         "editor.unicodeHighlight.allowedCharacters": {
             "'": true
         }
-    }
+    },
 
     // Color customizations within Aura Dark
     "editor.tokenColorCustomizations": {
@@ -54,6 +54,24 @@
           }
         ]
       }
-}
+},
+// Diable a bunch of copilot stuff
+"github.copilot.chat.agent.currentEditorContext.enabled": false,
+"github.copilot.chat.anthropic.useMessagesApi": false,
+"github.copilot.chat.backgroundAgent.enabled": false,
+"github.copilot.chat.claudeAgent.enabled": false,
+"github.copilot.chat.cloudAgent.enabled": false,
+"github.copilot.chat.customInstructionsInSystemMessage": false,
+"github.copilot.chat.reviewAgent.enabled": false,
+"github.copilot.chat.reviewSelection.enabled": false,
+"github.copilot.enable": {
+    "*": false,
+    "plaintext": false,
+    "markdown": false,
+    "scminput": false
+},
+
+// Even with vim extension, have leftarrow/rightarrow go across lines in insert mode ([,]) and using arrow keys in normal mode (<,>)
+"vim.whichwrap": "b,s,h,l,<,>,[,]",
 
 }
