@@ -65,7 +65,7 @@
 "github.copilot.chat.reviewAgent.enabled": false,
 "github.copilot.chat.reviewSelection.enabled": false,
 "github.copilot.enable": {
-    "*": false,
+    "*": true,
     "plaintext": false,
     "markdown": false,
     "scminput": false
