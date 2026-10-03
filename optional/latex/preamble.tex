@@ -1,0 +1,75 @@
+\usepackage{xspace}
+\usepackage{graphicx}
+\usepackage{xcolor}
+%\usepackage{url}
+%\usepackage{times}
+%\usepackage{cite} 
+%\usepackage{wrapfig}
+%\usepackage{caption}
+%\usepackage{array}
+%\usepackage{rotating}
+%\usepackage{booktabs}
+%\usepackage{multirow}
+%\usepackage{verbatim}
+%\usepackage{textcomp}
+%\usetikzlibrary{fit}
+%\usepackage{pgfgantt}
+%\usepackage{pdfpages}
+%\usepackage{placeins}
+%\usepackage{comment}
+%\usepackage{gensymb}
+%\usepackage{mathpartir}
+%\usepackage{algorithm}
+%\usepackage{algpseudocode}
+%% \usepackage[colorlinks=true, urlcolor=blue]{hyperref}
+%\usepackage[hidelinks]{hyperref}
+%\usepackage{cleveref}
+%\usepackage{enumitem}
+
+
+%%%%%%%% Begin MakeTodo Def %%%%%%%%
+% Define the color list via \ifcase (1-indexed)
+\newcommand{\todocolorlist}[1]{%
+  \ifcase#1\or red\or cyan\or orange\or violet\or green\or magenta\or purple\or blue\or brown\or olive\or teal\or lime\fi%
+}
+\newcommand{\todolistlength}{12}
+
+% Helper: capitalize first letter only
+\newcommand{\capfirst}[1]{\expandafter\@capfirst#1\@nil}
+\def\@capfirst#1#2\@nil{\MakeUppercase{#1}#2}
+
+% Counter to track current color
+\newcounter{todocoloridx}
+\setcounter{todocoloridx}{1}
+
+\newcommand{\MakeTodo}[2][]{%
+   % Use provided color or cycle
+  \ifx&#1&%
+    \colorlet{todocolor#2}{\todocolorlist{\thetodocoloridx}}%
+    \stepcounter{todocoloridx}%
+    \ifnum\thetodocoloridx>\todolistlength%
+      \setcounter{todocoloridx}{1}%
+    \fi%
+  \else
+    \colorlet{todocolor#2}{#1}%
+  \fi
+  % Clear before defining to allow redefinition
+  \expandafter\let\csname #2\endcsname\undefined%
+  % Define \<name>
+  \expandafter\newcommand\csname #2\endcsname[1]{%
+    \textcolor{todocolor#2}{\textbf{\ [~\capfirst{#2}:~##1~]\ }}%
+  }%
+}
+%%%%%%%% End MakeTodo Def %%%%%%%%
+%%%%%%%% Begin MakeTodo %%%%%%%%
+\MakeTodo{todo}
+\MakeTodo[red]{fixme}
+\MakeTodo{sarah}
+\MakeTodo{collaborator}
+%%%%%%%% End MakeTodo %%%%%%%%
+%%%%%%%% Begin Sarah-convenience %%%%%%%%
+\let\sstodo\sarah % sarah-specifically likes calling sstodo
+%%%%%%%% End Sarah-convenience %%%%%%%%
+
+
+

@@ -17,7 +17,8 @@ Or, you can also run setups (`core/program/setup_program.sh` or `optional/progra
 
 ## Programs installed:
 
-Currently, core programs are sh (shell-agnostic PATH, etc), bash, vim, neovim, and tmux.  Optional programs are sway and vscode.
+Currently, core programs are sh (shell-agnostic PATH, etc), several apt packages, bash, vim, neovim, and tmux.  Optional programs are sway, vscode, and additional apt packages.
+
 
 ## Adding a new program
 

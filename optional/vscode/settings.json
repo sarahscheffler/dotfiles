@@ -65,7 +65,7 @@
 "github.copilot.chat.reviewAgent.enabled": false,
 "github.copilot.chat.reviewSelection.enabled": false,
 "github.copilot.enable": {
-    "*": true,
+    "*": false,
     "plaintext": false,
     "markdown": false,
     "scminput": false
@@ -73,5 +73,11 @@
 
 // Even with vim extension, have leftarrow/rightarrow go across lines in insert mode ([,]) and using arrow keys in normal mode (<,>)
 "vim.whichwrap": "b,s,h,l,<,>,[,]",
+
+// Always use diff editor
+"diffEditor.renderSideBySide": true,
+"diffEditor.wordWrap": "on",
+"chat.editor.wordWrap": "on",
+//"workbench.editor.enablePreview": false
 
 }

@@ -1,0 +1,8 @@
+# Third-party apt repos to add before installing optional packages.
+# Uncomment an entry to enable it; each runs optional/apt/repos/<name>.sh.
+# Each script's header links to the vendor's latest install instructions.
+
+#code                   # VS Code (Microsoft)
+#displaylink-driver     # DisplayLink (Synaptics)
+#docker-ce              # Docker — also provides docker-ce-cli, containerd.io, docker-*-plugin
+#element-desktop        # Element

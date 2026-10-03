@@ -1,0 +1,23 @@
+# apt packages to install on a new Ubuntu machine.
+# One package per line. Blank lines and # comments are ignored.
+
+# Core tools used by these dotfiles
+git
+vim
+neovim
+tmux
+curl
+ca-certificates
+gpg
+wl-clipboard
+
+# Build / general utilities
+build-essential
+wget
+htop
+tree
+unzip
+pavucontrol
+sshfs
+rclone
+vlc

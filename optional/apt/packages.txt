@@ -1,0 +1,25 @@
+# Optional apt packages. Uncomment the ones you want on this machine.
+# One package per line. Blank lines and # comments are ignored.
+#
+# Packages marked [repo] are not in Ubuntu's default repositories; also uncomment
+# the named entry in repos.txt, or apt will fail to install the whole list.
+
+#cheese
+#code                       # [repo: code]                https://code.visualstudio.com/docs/setup/linux
+#jupyter
+#python3-nbformat
+#displaylink-driver         # [repo: displaylink-driver]  https://www.synaptics.com/products/displaylink-graphics/downloads/ubuntu
+
+# iPhone / iOS device access
+#libimobiledevice-utils
+#usbmuxd
+#ifuse
+
+# Docker                    # [repo: docker-ce]           https://docs.docker.com/engine/install/ubuntu/
+#docker-ce
+#docker-ce-cli
+#containerd.io
+#docker-buildx-plugin
+#docker-compose-plugin
+
+#element-desktop            # [repo: element-desktop]     https://element.io/download#linux
